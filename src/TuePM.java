@@ -25,10 +25,7 @@ public class TuePM {
 		return myMap[x][y];
 	}
 
-	public static String direction(int myX, int myY, int x, int y) {
-		return "";
-
-	}
+	
 
 	public static String showSurroundings(int x, int y, String[][] myMap) {
 		String nResult = whatIsToTheNorth(x, y, myMap);
