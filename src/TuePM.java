@@ -60,7 +60,7 @@ public class TuePM {
 
 	public static String whatIsToTheSouth(int x, int y, String[][] myMap) {
 		String result = "";
-		if (y >= NUM_OF_COLUMNS) {
+		if (y > 0) {
 			result = myMap[x][y - 1];
 		}
 		return result;
@@ -68,7 +68,7 @@ public class TuePM {
 
 	public static String whatIsToTheWest(int x, int y, String[][] myMap) {
 		String result = "";
-		if (x >= NUM_OF_ROWS) {
+		if (x > 0) {
 			result = myMap[x - 1][y];
 		}
 		return result;
