@@ -24,7 +24,7 @@ public class TuePM {
 		map[6][5] = "a meadow";
 		Scanner myScanner = new Scanner(System.in);
 		while (true) {
-			System.out.println("You are curently in "
+			System.out.println("You are curently at "
 					+ showMyLocation(myXCoord, myYCoord, map));
 			System.out.println(showSurroundings(myXCoord, myYCoord, map));
 			System.out.println("which direction do you want to go?");
@@ -36,9 +36,9 @@ public class TuePM {
 
 	public static int moveWestOrEast(String direction){
 		int result = 0;
-		if (direction == "east"){
+		if (direction.equals("east")){
 			result = 1;
-		} else if (direction == "west"){
+		} else if (direction.equals("west")){
 			result = -1;
 		}
 		return result;
@@ -46,9 +46,9 @@ public class TuePM {
 	
 	public static int moveNorthOrSouth(String direction){
 		int result = 0;
-		if (direction == "north"){
+		if (direction.equals("north")){
 			result = 1;
-		} else if (direction == "south"){
+		} else if (direction.equals("south")){
 			result = -1;
 		}
 		return result;
