@@ -1,3 +1,4 @@
+import java.util.Scanner;
 public class TuePM {
 
 	public static String[][] map;
@@ -21,10 +22,38 @@ public class TuePM {
 		map[4][5] = "a castle";
 		map[5][4] = "a canyon";
 		map[6][5] = "a meadow";
-		System.out.println("You are curently in " + showMyLocation(myXCoord, myYCoord, map));
-		System.out.println(showSurroundings(myXCoord, myYCoord, map));
+		Scanner myScanner = new Scanner(System.in);
+		while (true) {
+			System.out.println("You are curently in "
+					+ showMyLocation(myXCoord, myYCoord, map));
+			System.out.println(showSurroundings(myXCoord, myYCoord, map));
+			System.out.println("which direction do you want to go?");
+			String answer = myScanner.nextLine();
+			myXCoord = myXCoord + moveWestOrEast(answer);
+			myYCoord = myYCoord + moveNorthOrSouth(answer);
+		}
 	}
 
+	public static int moveWestOrEast(String direction){
+		int result = 0;
+		if (direction == "east"){
+			result = 1;
+		} else if (direction == "west"){
+			result = -1;
+		}
+		return result;
+	}
+	
+	public static int moveNorthOrSouth(String direction){
+		int result = 0;
+		if (direction == "north"){
+			result = 1;
+		} else if (direction == "south"){
+			result = -1;
+		}
+		return result;
+	}
+	
 	public static String showMyLocation(int x, int y, String[][] myMap) {
 		return myMap[x][y];
 	}
