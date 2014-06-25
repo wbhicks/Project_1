@@ -17,6 +17,10 @@ public class TuePM {
 			}
 		}
 		map[5][5] = "a forest";
+		map[5][6] = "a mountain";
+		map[4][5] = "a castle";
+		map[5][4] = "a canyon";
+		map[6][5] = "a meadow";
 		System.out.println("You are curently in " + showMyLocation(myXCoord, myYCoord, map));
 		System.out.println(showSurroundings(myXCoord, myYCoord, map));
 	}
@@ -33,8 +37,8 @@ public class TuePM {
 		String sResult = whatIsToTheSouth(x, y, myMap);
 		String wResult = whatIsToTheWest(x, y, myMap);
 
-		return "To your north is " + nResult + "To your north is " + eResult
-				+ "To your north is " + sResult + "To your north is " + wResult;
+		return " To your north is " + nResult + ", to your east is " + eResult
+				+ ", to your south is " + sResult + ", to your west is " + wResult;
 
 	}
 
@@ -71,11 +75,8 @@ public class TuePM {
 	}
 
 	public static String directionAsString(int myX, int myY, int x, int y) {
-		/*
-		 * It's simpler to use a String, but less efficient than using a
-		 * StringBuilder:
-		 */
-		String result = ""; // returns this IFF the same point
+		
+		String result = ""; 
 		if (y < myY) {
 			result = "north";
 		} else if (y > myY) {
