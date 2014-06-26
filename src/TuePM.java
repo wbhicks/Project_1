@@ -29,13 +29,13 @@ public class TuePM {
 		for (int i = 0; i < NUM_OF_ROWS; i++) {
 			for (int j = 0; j < NUM_OF_COLUMNS; j++) {
 				bigMap[i][j] = new Location();
-				bigMap[i][j].items.set(0, "a pumpkin");
+				bigMap[i][j].items.add("a pumpkin");
 			}
 		}
 		for (int i = 0; i < NUM_OF_ROWS; i++) {
 			for (int j = 0; j < NUM_OF_COLUMNS; j++) {
 				bigMap[i][j] = new Location();
-				bigMap[i][j].mobs.set(0, "a creeper");
+				bigMap[i][j].mobs.add("a creeper");
 			}
 		}
 		map[5][5] = "a forest";
