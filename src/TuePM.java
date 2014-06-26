@@ -22,17 +22,20 @@ public class TuePM {
 		}
 		for (int i = 0; i < NUM_OF_ROWS; i++) {
 			for (int j = 0; j < NUM_OF_COLUMNS; j++) {
+				bigMap[i][j] = new Location();
 				bigMap[i][j].environment = "a plain";
 			}
 		}
 		for (int i = 0; i < NUM_OF_ROWS; i++) {
 			for (int j = 0; j < NUM_OF_COLUMNS; j++) {
-				bigMap[i][j].items.set(0, "");
+				bigMap[i][j] = new Location();
+				bigMap[i][j].items.set(0, "a pumpkin");
 			}
 		}
 		for (int i = 0; i < NUM_OF_ROWS; i++) {
 			for (int j = 0; j < NUM_OF_COLUMNS; j++) {
-				bigMap[i][j].mobs.set(0, "");
+				bigMap[i][j] = new Location();
+				bigMap[i][j].mobs.set(0, "a creeper");
 			}
 		}
 		map[5][5] = "a forest";
@@ -50,7 +53,8 @@ public class TuePM {
 			System.out.println("You are curently at "
 					+ showMyLocation(myXCoord, myYCoord, map));
 			System.out.println(showSurroundings(myXCoord, myYCoord, map));
-			System.out.println("The objects in the room are" + showAllObjects(myXCoord, myYCoord, bigMap));
+			System.out.println("The objects in the room are"
+					+ showAllObjects(myXCoord, myYCoord, bigMap));
 			System.out.println("which direction do you want to go?");
 			String answer = myScanner.nextLine();
 			myXCoord = myXCoord + moveWestOrEast(answer);
@@ -58,37 +62,36 @@ public class TuePM {
 		}
 	}
 
-	public static ArrayList<String> showAllObjects(int x, int y, Location[][] map){
-		
+	public static ArrayList<String> showAllObjects(int x, int y,
+			Location[][] map) {
+
 		ArrayList<String> result = map[x][y].items;
-				return result;
+		return result;
 	}
-	
-	public static int moveWestOrEast(String direction){
+
+	public static int moveWestOrEast(String direction) {
 		int result = 0;
-		if (direction.equals("east")){
+		if (direction.equals("east")) {
 			result = 1;
-		} else if (direction.equals("west")){
+		} else if (direction.equals("west")) {
 			result = -1;
 		}
 		return result;
 	}
-	
-	public static int moveNorthOrSouth(String direction){
+
+	public static int moveNorthOrSouth(String direction) {
 		int result = 0;
-		if (direction.equals("north")){
+		if (direction.equals("north")) {
 			result = 1;
-		} else if (direction.equals("south")){
+		} else if (direction.equals("south")) {
 			result = -1;
 		}
 		return result;
 	}
-	
+
 	public static String showMyLocation(int x, int y, String[][] myMap) {
 		return myMap[x][y];
 	}
-
-	
 
 	public static String showSurroundings(int x, int y, String[][] myMap) {
 		String nResult = whatIsToTheNorth(x, y, myMap);
@@ -97,7 +100,8 @@ public class TuePM {
 		String wResult = whatIsToTheWest(x, y, myMap);
 
 		return " To your north is " + nResult + ", to your east is " + eResult
-				+ ", to your south is " + sResult + ", to your west is " + wResult;
+				+ ", to your south is " + sResult + ", to your west is "
+				+ wResult;
 
 	}
 
@@ -134,8 +138,8 @@ public class TuePM {
 	}
 
 	public static String directionAsString(int myX, int myY, int x, int y) {
-		
-		String result = ""; 
+
+		String result = "";
 		if (y < myY) {
 			result = "north";
 		} else if (y > myY) {
