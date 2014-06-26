@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class TuePM {
 
@@ -24,16 +25,32 @@ public class TuePM {
 				bigMap[i][j].environment = "a plain";
 			}
 		}
+		for (int i = 0; i < NUM_OF_ROWS; i++) {
+			for (int j = 0; j < NUM_OF_COLUMNS; j++) {
+				bigMap[i][j].items.set(0, "");
+			}
+		}
+		for (int i = 0; i < NUM_OF_ROWS; i++) {
+			for (int j = 0; j < NUM_OF_COLUMNS; j++) {
+				bigMap[i][j].mobs.set(0, "");
+			}
+		}
 		map[5][5] = "a forest";
 		map[5][6] = "a mountain";
 		map[4][5] = "a castle";
 		map[5][4] = "a canyon";
 		map[6][5] = "a meadow";
+		bigMap[5][5].environment = "a forest";
+		bigMap[5][6].environment = "a mountain";
+		bigMap[4][5].environment = "a castle";
+		bigMap[5][4].environment = "a canyon";
+		bigMap[6][5].environment = "a meadow";
 		Scanner myScanner = new Scanner(System.in);
 		while (true) {
 			System.out.println("You are curently at "
 					+ showMyLocation(myXCoord, myYCoord, map));
 			System.out.println(showSurroundings(myXCoord, myYCoord, map));
+			System.out.println("The objects in the room are" + showAllObjects(myXCoord, myYCoord, bigMap));
 			System.out.println("which direction do you want to go?");
 			String answer = myScanner.nextLine();
 			myXCoord = myXCoord + moveWestOrEast(answer);
@@ -41,6 +58,12 @@ public class TuePM {
 		}
 	}
 
+	public static ArrayList<String> showAllObjects(int x, int y, Location[][] map){
+		
+		ArrayList<String> result = map[x][y].items;
+				return result;
+	}
+	
 	public static int moveWestOrEast(String direction){
 		int result = 0;
 		if (direction.equals("east")){
