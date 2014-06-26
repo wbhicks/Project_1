@@ -6,15 +6,22 @@ public class TuePM {
 	public static int myYCoord;
 	public static int NUM_OF_ROWS = 10;
 	public static int NUM_OF_COLUMNS = 10;
+	public static Location[][] bigMap;
 
 	public static void main(String[] arguments) {
 		System.out.println("hello world");
 		map = new String[NUM_OF_ROWS][NUM_OF_COLUMNS];
 		myXCoord = 5;
 		myYCoord = 5;
+		bigMap = new Location[NUM_OF_ROWS][NUM_OF_COLUMNS];
 		for (int i = 0; i < NUM_OF_ROWS; i++) {
 			for (int j = 0; j < NUM_OF_COLUMNS; j++) {
-				map[i][j] = "";
+				map[i][j] = "a plain";
+			}
+		}
+		for (int i = 0; i < NUM_OF_ROWS; i++) {
+			for (int j = 0; j < NUM_OF_COLUMNS; j++) {
+				bigMap[i][j].environment = "a plain";
 			}
 		}
 		map[5][5] = "a forest";
