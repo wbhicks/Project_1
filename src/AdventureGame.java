@@ -27,7 +27,7 @@ public class AdventureGame {
 				bigMap[i][j] = new Location();
 				bigMap[i][j].environment = "a plain";
 				bigMap[i][j].items.add("pumpkin");
-				bigMap[i][j].mobs.add("creeper");
+				bigMap[i][j].mobs.add(creeper());
 			}
 		}
 		bigMap[5][5].environment = "a forest";
@@ -42,20 +42,23 @@ public class AdventureGame {
 		initialize();
 		System.out.println("Hello. What is your name?");
 		Adventurer.name = myScanner.nextLine();
+		Adventurer.health = 100;
+		System.out.println("OK, " + Adventurer.name + ", you have 100 health.");
 		while (true) {
 			System.out.println("You are curently at "
 					+ showMyLocation(myXCoord, myYCoord, Location.convertLocToString(bigMap)));
 			System.out.println(showSurroundings(myXCoord, myYCoord, Location.convertLocToString(bigMap)));
-			System.out.println("The objects in the room are ");
+			System.out.println("The objects in the room are:");
 			ArrayList<String> stuff = showAllObjects(myXCoord, myYCoord, bigMap);
 			for (String s : stuff) {
 			    System.out.println(s);
 			}
-		determineAction();	
+			System.out.println("The mobs in the room are:");
+		determineAdvAction();	
 		}
 	}
 	
-	public static void determineAction (){
+	public static void determineAdvAction (){
 		System.out.println("tell me what to do");
 		String answer = myScanner.nextLine();
 		optPickUp(answer);
@@ -103,6 +106,11 @@ public class AdventureGame {
 		ArrayList<String> result = map[x][y].items;
 		return result;
 	}
+	
+	public static ArrayList<Mob> showAllMobs(int x, int y, Location[][] map){
+		ArrayList<Mob> result = map[x][y].mobs;
+		return result;
+	}
 
 	public static int moveWestOrEast(String direction) {
 		int result = 0;
@@ -134,7 +142,7 @@ public class AdventureGame {
 		String sResult = whatIsToTheSouth(x, y, myMap);
 		String wResult = whatIsToTheWest(x, y, myMap);
 
-		return " To your north is " + nResult + ", to your east is " + eResult
+		return "To your north is " + nResult + ", to your east is " + eResult
 				+ ", to your south is " + sResult + ", to your west is "
 				+ wResult;
 
@@ -170,6 +178,14 @@ public class AdventureGame {
 			result = myMap[x - 1][y];
 		}
 		return result;
+	}
+	
+	public static Mob creeper(){
+		Mob creeper = new Mob();
+		creeper.type = "creeper";
+		creeper.health = 1;
+		creeper.damage = 50;
+		return creeper;
 	}
 
 	public static String directionAsString(int myX, int myY, int x, int y) {
