@@ -95,8 +95,14 @@ public class AdventureGame {
 		if (answer.length() >= 8) {
 			String key = answer.substring(0,7);
 			if(key.equals("attack ")){
-				Mob enemy = presentEnemies.get(0);
-				result = Adventurer.attack(bigMap[myXCoord][myYCoord].mobs, enemy, Adventurer.damage);
+				String restOfAnswer = answer.substring(7);
+	           int indicatedMob = Integer.parseInt(restOfAnswer);	           
+	                int x = myXCoord;
+	                int y = myYCoord;
+	                ArrayList<Mob> enemiesOnTargetTile = bigMap[x][y].mobs;
+	                Mob theRightTarget =  enemiesOnTargetTile.get(indicatedMob);
+	                result = Adventurer.attack(bigMap[myXCoord][myYCoord].mobs, theRightTarget, 
+	                Adventurer.damage);	            				
 			}
 		}
 		return result;
