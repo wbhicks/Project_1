@@ -75,9 +75,11 @@ public class AdventureGame {
 
 			System.out.println("what do you want to do?");
 			String answer = myScanner.nextLine();
-			determineAdvAction(answer);
+			determineMovement(answer);
 			if (!adventurerMoved(answer)){
-			determineMobAction();
+				if (playerMadeRealMove(answer)){
+					determineMobAction();
+				}
 			}
 		}
 		System.out.println("You are dead. Game over.");
@@ -97,15 +99,16 @@ public class AdventureGame {
 	}
 
 	public static boolean playerMadeRealMove(String answer){
-		boolean result = false;		
+		boolean result = false;	
+		if(	optPickUp(answer)||optDrop(answer)||optSummary(answer)||optAttack(answer, bigMap[myXCoord][myYCoord].mobs)){
+			result = true;
+		} else{
+			System.out.println("Sorry, that is not a command I recognize");
+		}
 		return result;
 	}
 	
-	public static void determineAdvAction(String answer) {
-		optPickUp(answer);
-		optDrop(answer);
-		optSummary(answer);
-		optAttack(answer, bigMap[myXCoord][myYCoord].mobs);
+	public static void determineMovement(String answer) {
 		myXCoord = myXCoord + moveWestOrEast(answer);
 		myYCoord = myYCoord + moveNorthOrSouth(answer);
 	}
