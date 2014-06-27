@@ -46,7 +46,7 @@ public class AdventureGame {
 		Adventurer.name = myScanner.nextLine();
 		Adventurer.health = INITIAL_HEALTH;
 		Adventurer.damage = INITIAL_DAMAGE;
-		while (true) {
+		while (Adventurer.health > 0) {
 			System.out.println("OK, " + Adventurer.name + ", you have "+Adventurer.health+" health.");
 			System.out.println("You are curently at "
 					+ showMyLocation(myXCoord, myYCoord, Location.convertLocToString(bigMap)));
@@ -62,6 +62,20 @@ public class AdventureGame {
 			    System.out.println(s);
 			}
 		determineAdvAction();	
+		determineMobAction();
+		}
+		System.out.println("You are dead");
+	}
+	
+	public static void determineMobAction(){
+		ArrayList<Mob> enemies = bigMap[myXCoord][myYCoord].mobs;
+		int length = enemies.size();
+		if ( length > 0){
+			for(int i = 0; i < length; i++){
+				Mob enemy = enemies.get(i);
+			Adventurer.health = Adventurer.health - enemy.damage;
+			System.out.println("The " + enemy.name + " attacks you for " + enemy.damage + " damage");
+			}
 		}
 	}
 	
