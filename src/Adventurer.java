@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 public class Adventurer {
+public static String name;	
 public static ArrayList<String> inventory = new ArrayList<String>();
 public static int health ;
 

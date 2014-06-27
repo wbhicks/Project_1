@@ -19,13 +19,15 @@ public class AdventureGame {
 		}
 	}
 
-	public static void initialize(){
+	public static void initialize(){		
+		myXCoord = 5;
+		myYCoord = 5;
 		for (int i = 0; i < NUM_OF_ROWS; i++) {
 			for (int j = 0; j < NUM_OF_COLUMNS; j++) {
 				bigMap[i][j] = new Location();
 				bigMap[i][j].environment = "a plain";
-				bigMap[i][j].items.add("a pumpkin");
-				bigMap[i][j].mobs.add("a creeper");
+				bigMap[i][j].items.add("pumpkin");
+				bigMap[i][j].mobs.add("creeper");
 			}
 		}
 		bigMap[5][5].environment = "a forest";
@@ -36,11 +38,10 @@ public class AdventureGame {
 	}
 	
 	public static void main(String[] arguments) {
-		System.out.println("hello world");
-		myXCoord = 5;
-		myYCoord = 5;
 		bigMap = new Location[NUM_OF_ROWS][NUM_OF_COLUMNS];
 		initialize();
+		System.out.println("Hello. What is your name?");
+		Adventurer.name = myScanner.nextLine();
 		while (true) {
 			System.out.println("You are curently at "
 					+ showMyLocation(myXCoord, myYCoord, Location.convertLocToString(bigMap)));
