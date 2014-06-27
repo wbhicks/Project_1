@@ -40,13 +40,12 @@ public class AdventureGame {
 		bigMap[4][5].environment = "a castle";
 		bigMap[5][4].environment = "a canyon";
 		bigMap[6][5].environment = "a meadow";
-		System.out
-				.println("Here is how you play the game. To move, type north, south, east, or west.\r"
-						+ "To pick up an item, type 'pick up ', followed by the name of the item.\r"
-						+ "To drop an item, type 'drop ', followed by the name of the item.\r"
-						+ "To attack, type 'attack ', followed by the number of the mob you wish to attack, minus one.\r"
-						+ "For example, if you wanted to attack the first mob listed, you would type:\r"
-						+ "attack 0");
+		System.out.println("Here is how you play the game. To move, type north, south, east, or west.\r"
+		+ "To pick up an item, type 'pick up ', followed by the name of the item.\r"
+		+ "To drop an item, type 'drop ', followed by the name of the item.\r"
+		+ "To attack, type 'attack ', followed by the number of the mob you wish to attack, minus one.\r"
+		+ "For example, if you wanted to attack the first mob listed, you would type:\r"
+		+ "attack 0");
 		System.out.println("Hello. What is your name?");
 		Adventurer.name = myScanner.nextLine();
 	}
@@ -110,6 +109,7 @@ public class AdventureGame {
 				String restOfAnswer = answer.substring(7);
 				if (restOfAnswer.matches("[0-9]+")) {
 					int indicatedMob = Integer.parseInt(restOfAnswer);
+					if(presentEnemies.size() >= indicatedMob){
 					int x = myXCoord;
 					int y = myYCoord;
 					ArrayList<Mob> enemiesOnTargetTile = bigMap[x][y].mobs;
@@ -117,6 +117,7 @@ public class AdventureGame {
 					result = Adventurer.attack(bigMap[myXCoord][myYCoord].mobs,
 							theRightTarget, Adventurer.damage);
 					result = true;
+					}
 				}
 			}
 		}
