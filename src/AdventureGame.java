@@ -9,6 +9,8 @@ public class AdventureGame {
 	public static int NUM_OF_COLUMNS = 10;
 	public static Location[][] bigMap;
 	public static Scanner myScanner = new Scanner(System.in);
+	public static int INITIAL_DAMAGE = 10;
+	public static int INITIAL_HEALTH = 100;
 	
 	public static void dump(){
 		for(int i = 0; i < NUM_OF_ROWS; i++){
@@ -42,7 +44,8 @@ public class AdventureGame {
 		initialize();
 		System.out.println("Hello. What is your name?");
 		Adventurer.name = myScanner.nextLine();
-		Adventurer.health = 100;
+		Adventurer.health = INITIAL_HEALTH;
+		Adventurer.damage = INITIAL_DAMAGE;
 		System.out.println("OK, " + Adventurer.name + ", you have 100 health.");
 		while (true) {
 			System.out.println("You are curently at "
@@ -72,6 +75,19 @@ public class AdventureGame {
 		myYCoord = myYCoord + moveNorthOrSouth(answer);
 	}
 
+	public static boolean optAttack(String answer, ArrayList<Mob> presentEnemies){
+		boolean result = false;
+		if (answer.length() >= 8) {
+			String key = answer.substring(0,7);
+			if(key.equals("attack ")){
+				Mob enemy = new Mob();
+				enemy.name = answer.substring(7);
+				result = Adventurer.attack(bigMap[myXCoord][myYCoord].mobs, enemy, Adventurer.damage);
+			}
+		}
+		return result;
+	}
+	
 	public static boolean optPickUp(String answer){
 		boolean result = false;
 		if (answer.length() >= 9) {
