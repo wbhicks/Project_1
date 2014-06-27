@@ -32,7 +32,7 @@ public static boolean attack (ArrayList<Mob> enemies, Mob enemy, int damage){
 	if(enemies.contains(enemy)){
 		result = true;
 		enemy.health = enemy.health - damage;
-		System.out.println("The "+enemy.name+"takes "+ damage +" damage");
+		System.out.println("The "+enemy.name+" takes "+ damage +" damage");
 		if(enemy.health <= 0){
 			enemies.remove(enemy);
 			System.out.println("The "+enemy.name+" is dead.");

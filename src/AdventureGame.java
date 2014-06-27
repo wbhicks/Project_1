@@ -46,8 +46,8 @@ public class AdventureGame {
 		Adventurer.name = myScanner.nextLine();
 		Adventurer.health = INITIAL_HEALTH;
 		Adventurer.damage = INITIAL_DAMAGE;
-		System.out.println("OK, " + Adventurer.name + ", you have 100 health.");
 		while (true) {
+			System.out.println("OK, " + Adventurer.name + ", you have "+Adventurer.health+" health.");
 			System.out.println("You are curently at "
 					+ showMyLocation(myXCoord, myYCoord, Location.convertLocToString(bigMap)));
 			System.out.println(showSurroundings(myXCoord, myYCoord, Location.convertLocToString(bigMap)));
@@ -71,6 +71,7 @@ public class AdventureGame {
 		optPickUp(answer);
 		optDrop(answer);
 		optSummary(answer);
+		optAttack(answer, bigMap[myXCoord][myYCoord].mobs);
 		myXCoord = myXCoord + moveWestOrEast(answer);
 		myYCoord = myYCoord + moveNorthOrSouth(answer);
 	}
