@@ -12,6 +12,7 @@ public class AdventureGame {
 	public static int INITIAL_DAMAGE = 10;
 	public static int INITIAL_HEALTH = 100;
 
+
 	public static void dump() {
 		for (int i = 0; i < NUM_OF_ROWS; i++) {
 			System.out.println("i =" + i);
@@ -71,8 +72,13 @@ public class AdventureGame {
 			for (String s : enemies) {
 				System.out.println(s);
 			}
-			determineAdvAction();
+
+			System.out.println("what do you want to do?");
+			String answer = myScanner.nextLine();
+			determineAdvAction(answer);
+			if (!adventurerMoved(answer)){
 			determineMobAction();
+			}
 		}
 		System.out.println("You are dead");
 	}
@@ -90,9 +96,12 @@ public class AdventureGame {
 		}
 	}
 
-	public static void determineAdvAction() {
-		System.out.println("what do you want to do?");
-		String answer = myScanner.nextLine();
+	public static boolean playerMadeRealMove(String answer){
+		boolean result = false;		
+		return result;
+	}
+	
+	public static void determineAdvAction(String answer) {
 		optPickUp(answer);
 		optDrop(answer);
 		optSummary(answer);
@@ -101,6 +110,14 @@ public class AdventureGame {
 		myYCoord = myYCoord + moveNorthOrSouth(answer);
 	}
 
+	public static boolean adventurerMoved (String answer){
+		boolean result = false;
+		if (answer.equals("north") || answer.equals("south") || answer.equals("east") || answer.equals("west")){
+			result = true;
+		}
+		return result;
+	}
+	
 	public static boolean optAttack(String answer, ArrayList<Mob> presentEnemies) {
 		boolean result = false;
 		if (answer.length() >= 8) {
@@ -109,7 +126,7 @@ public class AdventureGame {
 				String restOfAnswer = answer.substring(7);
 				if (restOfAnswer.matches("[0-9]+")) {
 					int indicatedMob = Integer.parseInt(restOfAnswer);
-					if(presentEnemies.size() >= indicatedMob){
+					if(presentEnemies.size() > indicatedMob){
 					int x = myXCoord;
 					int y = myYCoord;
 					ArrayList<Mob> enemiesOnTargetTile = bigMap[x][y].mobs;
