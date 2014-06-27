@@ -80,8 +80,7 @@ public class AdventureGame {
 		if (answer.length() >= 8) {
 			String key = answer.substring(0,7);
 			if(key.equals("attack ")){
-				Mob enemy = new Mob();
-				enemy.name = answer.substring(7);
+				Mob enemy = presentEnemies.get(0);
 				result = Adventurer.attack(bigMap[myXCoord][myYCoord].mobs, enemy, Adventurer.damage);
 			}
 		}
