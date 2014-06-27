@@ -8,33 +8,23 @@ public class TuePM {
 	public static int NUM_OF_ROWS = 10;
 	public static int NUM_OF_COLUMNS = 10;
 	public static Location[][] bigMap;
+	
+	public static void dump(){
+		for(int i = 0; i < NUM_OF_ROWS; i++){
+			System.out.println("i =" + i);
+			for(int j = 0; j < NUM_OF_COLUMNS; j++){
+				System.out.print(bigMap[i][j].items.size());
+			}
+		}
+	}
 
-	public static void main(String[] arguments) {
-		System.out.println("hello world");
-		map = new String[NUM_OF_ROWS][NUM_OF_COLUMNS];
-		myXCoord = 5;
-		myYCoord = 5;
-		bigMap = new Location[NUM_OF_ROWS][NUM_OF_COLUMNS];
+	public static void initialize(){
 		for (int i = 0; i < NUM_OF_ROWS; i++) {
 			for (int j = 0; j < NUM_OF_COLUMNS; j++) {
 				map[i][j] = "a plain";
-			}
-		}
-		for (int i = 0; i < NUM_OF_ROWS; i++) {
-			for (int j = 0; j < NUM_OF_COLUMNS; j++) {
 				bigMap[i][j] = new Location();
 				bigMap[i][j].environment = "a plain";
-			}
-		}
-		for (int i = 0; i < NUM_OF_ROWS; i++) {
-			for (int j = 0; j < NUM_OF_COLUMNS; j++) {
-				bigMap[i][j] = new Location();
 				bigMap[i][j].items.add("a pumpkin");
-			}
-		}
-		for (int i = 0; i < NUM_OF_ROWS; i++) {
-			for (int j = 0; j < NUM_OF_COLUMNS; j++) {
-				bigMap[i][j] = new Location();
 				bigMap[i][j].mobs.add("a creeper");
 			}
 		}
@@ -48,13 +38,25 @@ public class TuePM {
 		bigMap[4][5].environment = "a castle";
 		bigMap[5][4].environment = "a canyon";
 		bigMap[6][5].environment = "a meadow";
+	}
+	
+	public static void main(String[] arguments) {
+		System.out.println("hello world");
+		map = new String[NUM_OF_ROWS][NUM_OF_COLUMNS];
+		myXCoord = 5;
+		myYCoord = 5;
+		bigMap = new Location[NUM_OF_ROWS][NUM_OF_COLUMNS];
+		initialize();
 		Scanner myScanner = new Scanner(System.in);
 		while (true) {
 			System.out.println("You are curently at "
 					+ showMyLocation(myXCoord, myYCoord, map));
 			System.out.println(showSurroundings(myXCoord, myYCoord, map));
-			System.out.println("The objects in the room are"
-					+ showAllObjects(myXCoord, myYCoord, bigMap));
+			System.out.println("The objects in the room are ");
+			ArrayList<String> stuff = showAllObjects(myXCoord, myYCoord, bigMap);
+			for (String s : stuff) {
+			    System.out.println(s);
+			}
 			System.out.println("which direction do you want to go?");
 			String answer = myScanner.nextLine();
 			myXCoord = myXCoord + moveWestOrEast(answer);
