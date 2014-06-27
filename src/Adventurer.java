@@ -44,6 +44,7 @@ public static boolean attack (ArrayList<Mob> enemies, Mob enemy, int damage){
 }
 
 public static void summarize (){
+	System.out.println("Here is what is in your inventory:");
 	for (String s : inventory){
 		System.out.println(s);
 	}

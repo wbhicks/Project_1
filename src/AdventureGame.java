@@ -80,7 +80,7 @@ public class AdventureGame {
 			determineMobAction();
 			}
 		}
-		System.out.println("You are dead");
+		System.out.println("You are dead. Game over.");
 	}
 
 	public static void determineMobAction() {
