@@ -54,7 +54,10 @@ public class AdventureGame {
 			    System.out.println(s);
 			}
 			System.out.println("The mobs in the room are:");
-//			ArrayList<String> enemies = showAllMobs(allMobs);
+			ArrayList<String> enemies = showAllMobs(allMobs(myXCoord,myYCoord,bigMap));
+			for (String s : enemies) {
+			    System.out.println(s);
+			}
 		determineAdvAction();	
 		}
 	}
@@ -108,11 +111,13 @@ public class AdventureGame {
 		return result;
 	}
 	
-//	public static ArrayList<String> showAllMobs(ArrayList<Mob> creatures) {
-//
-//		ArrayList<String> result = creatures.type;
-//		return result;
-//	}
+	public static ArrayList<String> showAllMobs(ArrayList<Mob> creatures) {
+		ArrayList<String> out = new ArrayList<String>();
+	    for (Mob m : creatures) {
+	        out.add(m.name); // kind must be a String
+	    }
+	    return out;
+	}
 	
 	public static ArrayList<Mob> allMobs(int x, int y, Location[][] map){
 		ArrayList<Mob> result = map[x][y].mobs;
@@ -189,7 +194,7 @@ public class AdventureGame {
 	
 	public static Mob creeper(){
 		Mob creeper = new Mob();
-		creeper.type = "creeper";
+		creeper.name = "creeper";
 		creeper.health = 1;
 		creeper.damage = 50;
 		return creeper;
