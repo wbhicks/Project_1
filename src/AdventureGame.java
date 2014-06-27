@@ -54,6 +54,7 @@ public class AdventureGame {
 			    System.out.println(s);
 			}
 			System.out.println("The mobs in the room are:");
+//			ArrayList<String> enemies = showAllMobs(allMobs);
 		determineAdvAction();	
 		}
 	}
@@ -107,7 +108,13 @@ public class AdventureGame {
 		return result;
 	}
 	
-	public static ArrayList<Mob> showAllMobs(int x, int y, Location[][] map){
+//	public static ArrayList<String> showAllMobs(ArrayList<Mob> creatures) {
+//
+//		ArrayList<String> result = creatures.type;
+//		return result;
+//	}
+	
+	public static ArrayList<Mob> allMobs(int x, int y, Location[][] map){
 		ArrayList<Mob> result = map[x][y].mobs;
 		return result;
 	}
