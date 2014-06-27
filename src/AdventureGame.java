@@ -21,9 +21,12 @@ public class AdventureGame {
 		}
 	}
 
-	public static void initialize(){		
+	public static void initialize(){	
+		bigMap = new Location[NUM_OF_ROWS][NUM_OF_COLUMNS];
 		myXCoord = 5;
 		myYCoord = 5;
+		Adventurer.health = INITIAL_HEALTH;
+		Adventurer.damage = INITIAL_DAMAGE;
 		for (int i = 0; i < NUM_OF_ROWS; i++) {
 			for (int j = 0; j < NUM_OF_COLUMNS; j++) {
 				bigMap[i][j] = new Location();
@@ -37,15 +40,18 @@ public class AdventureGame {
 		bigMap[4][5].environment = "a castle";
 		bigMap[5][4].environment = "a canyon";
 		bigMap[6][5].environment = "a meadow";
+		System.out.println("Here is how you play the game. To move, type north, south, east, or west.\r" +
+		"To pick up an item, type 'pick up ', followed by the name of the item.\r" +
+		"To drop an item, type 'drop ', followed by the name of the item.\r" +
+		"To attack, type 'attack ', followed by the number of the mob you wish to attack, minus one.\r" +
+		"For example, if I wished to attack the first mob listed, I would type:\r" +
+		"attack 0");
+		System.out.println("Hello. What is your name?");
+		Adventurer.name = myScanner.nextLine();
 	}
 	
 	public static void main(String[] arguments) {
-		bigMap = new Location[NUM_OF_ROWS][NUM_OF_COLUMNS];
 		initialize();
-		System.out.println("Hello. What is your name?");
-		Adventurer.name = myScanner.nextLine();
-		Adventurer.health = INITIAL_HEALTH;
-		Adventurer.damage = INITIAL_DAMAGE;
 		while (Adventurer.health > 0) {
 			System.out.println("OK, " + Adventurer.name + ", you have "+Adventurer.health+" health.");
 			System.out.println("You are curently at "
@@ -61,7 +67,7 @@ public class AdventureGame {
 			for (String s : enemies) {
 			    System.out.println(s);
 			}
-		determineAdvAction();	
+		determineAdvAction();
 		determineMobAction();
 		}
 		System.out.println("You are dead");
@@ -96,13 +102,16 @@ public class AdventureGame {
 			String key = answer.substring(0,7);
 			if(key.equals("attack ")){
 				String restOfAnswer = answer.substring(7);
+				if(restOfAnswer.matches("[0-9]+")){
 	           int indicatedMob = Integer.parseInt(restOfAnswer);	           
 	                int x = myXCoord;
 	                int y = myYCoord;
 	                ArrayList<Mob> enemiesOnTargetTile = bigMap[x][y].mobs;
 	                Mob theRightTarget =  enemiesOnTargetTile.get(indicatedMob);
 	                result = Adventurer.attack(bigMap[myXCoord][myYCoord].mobs, theRightTarget, 
-	                Adventurer.damage);	            				
+	                Adventurer.damage);	
+	                result = true;
+				}
 			}
 		}
 		return result;
@@ -191,7 +200,7 @@ public class AdventureGame {
 		String wResult = whatIsToTheWest(x, y, myMap);
 
 		return "To your north is " + nResult + ", to your east is " + eResult
-				+ ", to your south is " + sResult + ", to your west is "
+				+ ",\rto your south is " + sResult + ", to your west is "
 				+ wResult;
 
 	}
