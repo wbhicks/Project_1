@@ -14,7 +14,7 @@ public static boolean pickUp (ArrayList<String> groundItems, String item){
 	return result;
 }
 
-public static boolean Drop (ArrayList<String> groundItems, String item){
+public static boolean drop (ArrayList<String> groundItems, String item){
 	boolean result = false;
 	if(inventory.remove(item)){
 		result = true;

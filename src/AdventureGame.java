@@ -41,7 +41,6 @@ public class AdventureGame {
 		myYCoord = 5;
 		bigMap = new Location[NUM_OF_ROWS][NUM_OF_COLUMNS];
 		initialize();
-
 		while (true) {
 			System.out.println("You are curently at "
 					+ showMyLocation(myXCoord, myYCoord, Location.convertLocToString(bigMap)));
@@ -59,6 +58,7 @@ public class AdventureGame {
 		System.out.println("tell me what to do");
 		String answer = myScanner.nextLine();
 		optPickUp(answer);
+		optDrop(answer);
 		optSummary(answer);
 		myXCoord = myXCoord + moveWestOrEast(answer);
 		myYCoord = myYCoord + moveNorthOrSouth(answer);
@@ -71,6 +71,18 @@ public class AdventureGame {
 			if(key.equals("pick up ")){
 				String object = answer.substring(8);
 				result = Adventurer.pickUp(bigMap[myXCoord][myYCoord].items, object);
+			}
+		}
+		return result;
+	}
+	
+	public static boolean optDrop(String answer){
+		boolean result = false;
+		if (answer.length() >= 6) {
+			String key = answer.substring(0,5);
+			if(key.equals("drop ")){
+				String object = answer.substring(5);
+				result = Adventurer.drop(bigMap[myXCoord][myYCoord].items, object);
 			}
 		}
 		return result;
