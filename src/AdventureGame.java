@@ -11,6 +11,7 @@ public class AdventureGame {
 	public static Scanner myScanner = new Scanner(System.in);
 	public static int INITIAL_DAMAGE = 10;
 	public static int INITIAL_HEALTH = 100;
+	public static int turn = 0;
 
 
 	public static void dump() {
@@ -79,6 +80,7 @@ public class AdventureGame {
 			if (!adventurerMoved(answer)){
 				if (playerMadeRealMove(answer)){
 					determineMobAction();
+					turn++;
 				}
 			}
 		}
@@ -102,7 +104,9 @@ public class AdventureGame {
 		boolean result = false;	
 		if(	optPickUp(answer)||optDrop(answer)||optSummary(answer)||optAttack(answer, bigMap[myXCoord][myYCoord].mobs)){
 			result = true;
-		} else{
+		} else if(optSummary(answer)){
+			
+		}else{
 			System.out.println("Sorry, that is not a command I recognize");
 		}
 		return result;
@@ -127,18 +131,11 @@ public class AdventureGame {
 			String key = answer.substring(0, 7);
 			if (key.equals("attack ")) {
 				String restOfAnswer = answer.substring(7);
-				if (restOfAnswer.matches("[0-9]+")) {
-					int indicatedMob = Integer.parseInt(restOfAnswer);
-					if(presentEnemies.size() > indicatedMob){
-					int x = myXCoord;
-					int y = myYCoord;
-					ArrayList<Mob> enemiesOnTargetTile = bigMap[x][y].mobs;
-					Mob theRightTarget = enemiesOnTargetTile.get(indicatedMob);
-					result = Adventurer.attack(bigMap[myXCoord][myYCoord].mobs,
-							theRightTarget, Adventurer.damage);
-					result = true;
-					}
+				Mob indicatedMob = bigMap[myXCoord][myYCoord].getMobByName(restOfAnswer);	
+				if(Adventurer.attack(bigMap[myXCoord][myYCoord].mobs, indicatedMob, Adventurer.damage)){	
+				result = true;	
 				}
+				
 			}
 		}
 		return result;
@@ -174,6 +171,7 @@ public class AdventureGame {
 		boolean result = false;
 		if (answer.equals("show")) {
 			Adventurer.summarize();
+			result = true;
 		}
 		return result;
 	}

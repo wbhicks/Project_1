@@ -15,4 +15,14 @@ public static String[][] convertLocToString (Location[][] initialMap){
 	return map;
 }
 
+public Mob getMobByName (String input){
+	Mob result = null;
+	for (Mob m : mobs){
+		if(m.name.equalsIgnoreCase(input)){
+			result = m;
+		}
+	}  
+	return result;
+}
+
 }
